@@ -1,0 +1,25 @@
+# This file contains basic documentation on how to run the backend code without issue
+
+# To install all the dependencies for the backend run - npm install
+NOTE: You must have node and npm installed and make sure you are running the command in the root directory where package.json file is located
+# Setup a mysql database
+The backend uses mysql as its database, setup a database before starting the server to persist data created.
+
+# Start the server
+#To start the server run - npm start
+
+# For the jwt secret key create a .env file in the root directory and create a key value pair and assign a value of your choice to the key.
+NOTE: make sure the key matches the key used in the code e.g JWT_SECRET=... should be the key name to match the codes where it appears
+# Set up mysql database and assign the user, database name and password in the .env file
+NOTE: make sure the key names match the ones used in the code e.g DB_PASSWORD should be assigned password, DB should be assigned the database name and USER should be assigned the user(it takes a default user root if no user was set in the .env file), the HOST value if not set uses the default localhost as host.
+
+# Start the server
+To start the server run - npm start
+
+
+TAKE NOTE: All enpoint uses pagination so you are required to add page and limit to the query
+EXAMPLE: http://localhost:5000/api/v1/products?page=1&limit=20 This will fetch 20 products from the first page
+
+
+
+If you encounter any issue contact me!
