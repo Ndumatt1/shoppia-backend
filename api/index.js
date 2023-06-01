@@ -11,6 +11,7 @@ const updateUser = require('./routes/userRoutes/updateUserRouter');
 const getUserInfo = require('./routes/userRoutes/getUserInfo');
 const deleteUser = require('./routes/userRoutes/deleteUser');
 const logout = require('./routes/userRoutes/logout');
+require('dotenv').config();
 
 const uploadProduct = require('./routes/productRoutes/uploadProducts');
 const getAllProducts = require('./routes/productRoutes/getAllProducts');
@@ -74,15 +75,15 @@ app.use('/api/v1', getUserOrder);
 app.use('/api/v1', getOrder);
 // Other routes will be added when ready
 
-const port = 5000;
+//const port = 5000;
 
 /**
  * Synchronize the database models and starts the server
  */
 synchronizeModels()
   .then(() => {
-    app.listen(port, () => {
-      console.log(`server started at ${port}`);
+    app.listen(process.env.PORT, () => {
+      console.log(`server started at ${process.env.PORT}`);
     });
   })
   .catch((error) => {
