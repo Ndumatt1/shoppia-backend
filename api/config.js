@@ -7,13 +7,14 @@ const mysql = require('mysql2');
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
-const password = process.env.DB_PASSWORD;
-const db = process.env.DB;
-const user = process.env.USER || 'root';
-const host = process.env.HOST || '127.0.0.1';
+const password = process.env.MYSQLPASSWORD;
+const db = process.env.MYSQLDATABASE;
+const user = process.env.MYSQLUSER;
+const host = process.env.MYSQLHOST;
 
 const sequelize = new Sequelize(db, user, password, {
   host: host,
+  port: process.env.MYSQLPORT,
   dialect: 'mysql',
   dialectModule: mysql,
 });
