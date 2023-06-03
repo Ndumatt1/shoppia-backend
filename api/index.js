@@ -22,6 +22,8 @@ const getUserProducts = require('./routes/productRoutes/getUserProducts');
 const deleteProduct = require('./routes/productRoutes/deleteProduct');
 const getProduct = require('./routes/productRoutes/getProduct');
 const updateProduct = require('./routes/productRoutes/updateProduct');
+const forgotPassword = require('./routes/userRoutes/forgotpassword');
+const resetPassword = require('./routes/userRoutes/resetPassword');
 
 const addToCart = require('./routes/cartRoutes/addToCart');
 const getCartItems = require('./routes/cartRoutes/getCartItems');
@@ -73,6 +75,8 @@ app.use('/api/v1', removeFromCart);
 app.use('/api/v1', placeOrder);
 app.use('/api/v1', getUserOrder);
 app.use('/api/v1', getOrder);
+app.use('/api/v1', forgotPassword);
+app.use('/api/v1', resetPassword);
 // Other routes will be added when ready
 
 //const port = 5000;
