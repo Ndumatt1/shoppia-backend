@@ -52,12 +52,12 @@ const login = async (req, res) => {
 
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      return res.status(401).json({ error: 'Invalid email' });
+      return res.status(401).json({ errors: 'Invalid email' });
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
-      return res.status(401).json({ error: 'Incorrect password' });
+      return res.status(401).json({ errors: 'Incorrect password' });
     }
 
     // Generate JWT token
@@ -66,10 +66,8 @@ const login = async (req, res) => {
     return res.status(200).setHeader('Authorization', token).json({ token });
   } catch (err) {
     console.error('Error during login:', err);
-    return handleError(res, 'Internal server error');
+    return res.status(500).json({errors: 'Internal server error'});
   }
 };
 
 module.exports = { login: [loginValidator, login] };
-
-//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsImlhdCI6MTY4NTAwMjI4MCwiZXhwIjoxNjg1MDg4NjgwfQ.Subu9swRFzgbqDoqobkp6DrcxTE1K0fO3txEHNw49hA
