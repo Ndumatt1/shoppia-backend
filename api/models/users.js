@@ -25,13 +25,9 @@ User.init(
       unique: true,
     },
     phonenumber: {
-      type: DataTypes.BIGINT,
+      type: DataTypes.STRING(20),
       allowNull: false,
       unique: true,
-      validate: {
-        isNumeric: true,
-        min: 0,
-      },
     },
     createdAt: {
       type: DataTypes.DATE,

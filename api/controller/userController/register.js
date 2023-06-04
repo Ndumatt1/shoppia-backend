@@ -41,7 +41,7 @@ const registerUser = async (req, res) => {
     const { email, password, phonenumber, firstname, lastname, username } =
       req.body;
 
-    const phoneNumberRegex = /^\d{11}$/;
+    const phoneNumberRegex = /^(\+234[0-9]{10})|(234[0-9]{10})|(0[7-9][01][0-9]{8})$/;
 
     if (!phoneNumberRegex.test(phonenumber)) {
       return res.status(400).json({ error: `Invalid phone number` });
