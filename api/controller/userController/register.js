@@ -7,15 +7,18 @@ const User = require('../../models/users');
 const bcrypt = require('bcrypt');
 const { body, validationResult } = require('express-validator');
 const nodemailer = require('nodemailer');
-// const jwt = require('jsonwebtoken');
+require('dotenv').config({ path: '../../.env' });
 
 /*const sendVerificationEmail = async (email, verificationLink) => {
     try {
+        const shopEmail = process.env.EMAIL;
+        const pass = process.env.PASS;
+        
         const mailTransporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'shoppiaonline8@gmail.com',
-            pass: 'cychheendvijetzy'
+            user: shopEmail,
+            pass: pass,
         }
         });
 
