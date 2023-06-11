@@ -41,6 +41,7 @@ const synchronizeModels = require('./db');
 const app = express();
 
 app.use(cors());
+app.use(express.static('products/uploads'));
 
 app.use(bodyParser.json());
 app.use(
