@@ -6,7 +6,14 @@
 const Product = require('../../models/product');
 const { body, validationResult } = require('express-validator');
 const multer = require('multer');
+const cloudinary = require('cloudinary').v2;
 
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDNAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+});
 // Configure multer for file upload
 const storage = multer.diskStorage({
   destination: 'products/uploads/',
@@ -39,14 +46,12 @@ const upload = multer({
 });
 
 const createProductValidator = [
-  //body('userId').notEmpty().isInt().withMessage('Invalid user ID'),
   body('title').notEmpty().withMessage('Title is required'),
   body('description').notEmpty().withMessage('Description is required'),
   body('price').notEmpty().isFloat().withMessage('Invalid price'),
   body('campus').notEmpty().withMessage('Campus is required'),
   body('quantity').notEmpty().isInt().withMessage('Invalid quantity'),
   body('category').notEmpty().withMessage('Category is required'),
-  // Add more validation rules for other fields if needed
 ];
 
 const createProduct = async (req, res) => {
@@ -68,8 +73,8 @@ const createProduct = async (req, res) => {
 	if (req.file === undefined) {
 	  return res.status(400).json({error: 'Image file is required'});
 	}
-    const imagePath = req.file.path;
-
+    //const imagePath = req.file.path;
+    const result = await cloudinary.uploader.upload(req.file.path);
     // Create a new product using the Product model
     const newProduct = await Product.create({
       userId,
@@ -79,7 +84,7 @@ const createProduct = async (req, res) => {
       campus,
       quantity,
       category,
-      imageUrl: imagePath, // Store the image file path in the imageUrl field
+      imageUrl: result.secure_url,
     });
 
     return res.status(201).json(newProduct);
@@ -101,5 +106,5 @@ const createProduct = async (req, res) => {
 module.exports = {
   createProductValidator,
   createProduct,
-  upload, // Export the multer upload object for route configuration
+  upload,
 };
