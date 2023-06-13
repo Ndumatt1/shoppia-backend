@@ -52,6 +52,11 @@ const addToCart = async (req, res) => {
         quantity,
         totalPrice,
       });
+      
+       const response = {
+          message: 'Product added successfully',
+          cartItem: newCartItem,
+        };
   
       return res.status(201).json(newCartItem);
     } catch (error) {
