@@ -33,8 +33,13 @@ const addToCart = async (req, res) => {
           quantity: newQuantity,
           totalPrice: newTotalPrice,
         });
+         
+        const response = {
+          message: 'Product added successfully',
+          cartItem: newCartItem,
+        };
   
-        return res.status(200).json(cartItem);
+        return res.status(200).json(response);
       }
   
       // Calculate the total price
