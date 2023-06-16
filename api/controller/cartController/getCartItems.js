@@ -22,11 +22,12 @@ const getUserCart = async (req, res) => {
       const { totalPrice } = cartItem;
       return { id, title, description, price, quantity, totalPrice, imageUrl };
     });
-
     // Calculate the grand total price
     const grandTotal = cartItems.reduce((total, cartItem) => {
-      return total + cartItem.totalPrice;
-    }, 0);
+      const totalPrice = parseFloat(cartItem.totalPrice);
+      return total + totalPrice;
+}, 0);
+
 
     return res.status(200).json({ products, grandTotal });
   } catch (error) {
